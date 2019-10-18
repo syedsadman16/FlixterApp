@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.w3c.dom.Text;
 
@@ -47,7 +48,9 @@ public class MovieRecyclerAdapter extends
         public void populateView(Movie movie) {
             title.setText(movie.getTitle());
             description.setText(movie.getDescription());
-            Glide.with(mContext).load(movie.getPosterPath()).into(posterPath);
+            Glide.with(mContext).load(movie.getPosterPath())
+                    .apply(new RequestOptions().placeholder(R.drawable.placeholder)
+                            .error(R.drawable.imagenotfound)).into(posterPath);
         }
 
 
