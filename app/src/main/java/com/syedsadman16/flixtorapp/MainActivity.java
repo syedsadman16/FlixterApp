@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
@@ -54,8 +55,11 @@ public class MainActivity extends AppCompatActivity {
                         String title = jsonArray.getJSONObject(i).getString("title");
                         String desc = jsonArray.getJSONObject(i).getString("overview");
                         String posterPath = jsonArray.getJSONObject(i).getString("poster_path");
+                        String rating = jsonArray.getJSONObject(i).getString("vote_average");
 
                         Movie dwnldMovie = new Movie(title, desc, posterPath);
+                        dwnldMovie.setRating(rating);
+
                         movies.add(dwnldMovie);
                         Log.i(TAG, "Success");
                         adapter.notifyDataSetChanged();
@@ -74,9 +78,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
-
-
-
 
 
 
