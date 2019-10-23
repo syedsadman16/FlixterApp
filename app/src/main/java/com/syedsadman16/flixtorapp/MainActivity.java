@@ -55,10 +55,14 @@ public class MainActivity extends AppCompatActivity {
                         String title = jsonArray.getJSONObject(i).getString("title");
                         String desc = jsonArray.getJSONObject(i).getString("overview");
                         String posterPath = jsonArray.getJSONObject(i).getString("poster_path");
+                        String backDrop = jsonArray.getJSONObject(i).getString("backdrop_path");
                         String rating = jsonArray.getJSONObject(i).getString("vote_average");
+                        String videoid = jsonArray.getJSONObject(i).getString("id");
 
                         Movie dwnldMovie = new Movie(title, desc, posterPath);
                         dwnldMovie.setRating(rating);
+                        dwnldMovie.setBackDrop(backDrop);
+                        dwnldMovie.setVideoId(videoid);
 
                         movies.add(dwnldMovie);
                         Log.i(TAG, "Success");

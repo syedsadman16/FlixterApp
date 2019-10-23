@@ -10,6 +10,8 @@ public class Movie {
     private String description;
     private String posterPath;
     private String rating;
+    private String backDrop;
+    private String id;
 
     //Parcel needs empty movie adapter
     public Movie(){}
@@ -40,6 +42,22 @@ public class Movie {
 
     public String getPosterPath(){
         return "https://image.tmdb.org/t/p/w342/" + posterPath;
+    }
+
+    public void setBackDrop(String bd) {
+        backDrop = bd;
+    }
+
+    public String getBackDrop() {
+        return "https://image.tmdb.org/t/p/w342/" + backDrop;
+    }
+
+    public void setVideoId(String videoid) {
+        id = videoid;
+    }
+
+    public String getVideoID(){
+        return id;
     }
 
 }
