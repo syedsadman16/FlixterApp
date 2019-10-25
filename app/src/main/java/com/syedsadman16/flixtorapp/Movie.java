@@ -26,16 +26,6 @@ public class Movie {
         return title;
     }
 
-    public void setRating(String r){
-        rating = r;
-       // int number = Integer.parseInt(r);
-       // rating = number / 2;
-    }
-
-    public String getRating(){
-        return rating;
-    }
-
     public String getDescription(){
         return description;
     }
@@ -44,20 +34,27 @@ public class Movie {
         return "https://image.tmdb.org/t/p/w342/" + posterPath;
     }
 
-    public void setBackDrop(String bd) {
-        backDrop = bd;
+    public String getRating(){
+        return rating;
     }
 
     public String getBackDrop() {
         return "https://image.tmdb.org/t/p/w342/" + backDrop;
     }
 
+    public String getVideoID(){
+        return id;
+    }
+
+    public void setRating(String r){ rating = r; }
+
+    public void setBackDrop(String bd) {
+        backDrop = bd;
+    }
+
     public void setVideoId(String videoid) {
         id = videoid;
     }
 
-    public String getVideoID(){
-        return id;
-    }
 
 }

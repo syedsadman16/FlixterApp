@@ -49,7 +49,6 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
 
-
         movieTitle = (TextView) findViewById(R.id.movieName);
         movieRating = (TextView) findViewById(R.id.movieRating);
         movieDesc = (TextView) findViewById(R.id.movieDesc);
@@ -60,10 +59,13 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
         movieTitle.setText(movies.getTitle());
         movieDesc.setText(movies.getDescription());
         movieRating.setText("Rating: " + movies.getRating() + "/10");
+
+        //rating bad config
+        ratingBar.setRating(Float.parseFloat(movies.getRating()) / 2);
         Drawable drawable = ratingBar.getProgressDrawable();
         drawable.setColorFilter(Color.parseColor("#0064A8"), PorterDuff.Mode.SRC_ATOP);
-        ratingBar.setRating(Float.parseFloat(movies.getRating()) / 2);
 
+        //Setting custom backgrounds for each activity based on movie
         detailImageView = (ImageView) findViewById(R.id.detailImageView);
         Glide.with(this).load(movies.getBackDrop())
                 .apply(new RequestOptions()
@@ -81,34 +83,36 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
 
                         try {
                             JSONArray jsonArray = jsonObject.getJSONArray("results");
+                            //YouTube video key
                             key = jsonArray.getJSONObject(0).getString("key");
 
-                            // temporary test video id -- TODO replace with movie trailer video id
                             final String videoId = key;
-
                             // resolve the player view from the layout
                             final YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.player);
-
                             // strings.xml
                             playerView.initialize(getString(R.string.youtube_api_key), new YouTubePlayer.OnInitializedListener() {
                                 @Override
                                 public void onInitializationSuccess(YouTubePlayer.Provider provider,
                                                                     YouTubePlayer youTubePlayer, boolean b) {
+                                    //If rating > 3.5, then its considered popular and fullscreen is shown
                                     youTubePlayer.cueVideo(videoId);
                                     if((Double.parseDouble(movies.getRating()) / 2) > 3.5){
                                         youTubePlayer.loadVideo(videoId);
                                         youTubePlayer.setFullscreen(true);
                                     }
+
+                                    /*
+                                    * Cant exit fullscreen video without leaving activity
+                                    * onBackPressed @override doesnt work
+                                     */
                                 }
 
                                 @Override
                                 public void onInitializationFailure(YouTubePlayer.Provider provider,
                                                                     YouTubeInitializationResult youTubeInitializationResult) {
-                                    // log the error
                                     Log.e("MovieTrailerActivity", "Error initializing YouTube player");
                                 }
                             });
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -118,10 +122,8 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
 
                     @Override
                     public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-
                     }
                 });
-
     }
 }
 //Glide Transformation Library https://github.com/wasabeef/glide-transformations

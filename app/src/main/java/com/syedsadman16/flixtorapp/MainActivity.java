@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Movies");
 
-
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvMovie);
         final MovieRecyclerAdapter adapter = new MovieRecyclerAdapter(this, movies);
         recyclerView.setAdapter(adapter);
@@ -52,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONArray jsonArray = jsonObject.getJSONArray("results");
 
                     for(int i=0; i<jsonArray.length(); i++) {
+                        //Downloaded json
                         String title = jsonArray.getJSONObject(i).getString("title");
                         String desc = jsonArray.getJSONObject(i).getString("overview");
                         String posterPath = jsonArray.getJSONObject(i).getString("poster_path");
@@ -59,20 +59,18 @@ public class MainActivity extends AppCompatActivity {
                         String rating = jsonArray.getJSONObject(i).getString("vote_average");
                         String videoid = jsonArray.getJSONObject(i).getString("id");
 
+                        //passing to movie object
                         Movie dwnldMovie = new Movie(title, desc, posterPath);
                         dwnldMovie.setRating(rating);
                         dwnldMovie.setBackDrop(backDrop);
                         dwnldMovie.setVideoId(videoid);
 
                         movies.add(dwnldMovie);
-                        Log.i(TAG, "Success");
                         adapter.notifyDataSetChanged();
                     }
                 } catch (JSONException e) {
-                    Log.i(TAG, "Async Failure");
                     e.printStackTrace();
                 }
-
 
             }
 
@@ -82,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
-
-
 
 
     }

@@ -26,9 +26,8 @@ import java.util.ArrayList;
 public class MovieRecyclerAdapter extends
         RecyclerView.Adapter<MovieRecyclerAdapter.ViewHolder> {
 
-    //To know where to inflate the views
+
     Context mContext;
-    //Need the actual data
     ArrayList<Movie> movies;
 
     public MovieRecyclerAdapter(Context ctx, ArrayList<Movie> m){
@@ -58,14 +57,13 @@ public class MovieRecyclerAdapter extends
             title.setText(movie.getTitle());
             description.setText(movie.getDescription());
             Glide.with(mContext).load(movie.getPosterPath())
-
                     .apply(new RequestOptions().placeholder(R.drawable.placeholder)
                             .error(R.drawable.imagenotfound)).into(posterPath);
 
+            //Displaying fullscreen indicator
             if((Double.parseDouble(movie.getRating()) / 2) > 3.5){
                 popularTextView.setVisibility(View.VISIBLE);
             }
-
 
             linear.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,7 +82,6 @@ public class MovieRecyclerAdapter extends
             });
         }
 
-
     }
 
     // Inflating a layout file and returning it to view holder
@@ -97,13 +94,11 @@ public class MovieRecyclerAdapter extends
     }
 
 
-
     // Get data from position and put into view holder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Movie movie = movies.get(position);
         holder.populateView(movie);
-
     }
 
 
