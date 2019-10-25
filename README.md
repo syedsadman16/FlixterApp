@@ -30,6 +30,11 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 - Movies are considered popular if rating > 3.5/5
 - Textview overlay with 'Popular Movie' tag
 - Popular movies open fullscreen trailers while less popular show detailed page
+- To prevent YouTubePlayer from reinstantiating, put the following in AndroidManifest:
+   <activity android:name=".MovieDetailsActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden">
+   </activity>
+
 
 ## Open-source libraries used
 - [Android Async HTTP](https://github.com/codepath/CPAsyncHttpClient) - Simple asynchronous HTTP requests with JSON parsing
