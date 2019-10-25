@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -40,13 +41,14 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
 
     Movie movies;
     ImageView detailImageView;
-    TextView movieTitle, movieRating, movieDesc;
+    TextView movieTitle, movieRating, movieDesc,popularTextView;
     RatingBar ratingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
+
 
         movieTitle = (TextView) findViewById(R.id.movieName);
         movieRating = (TextView) findViewById(R.id.movieRating);
@@ -85,15 +87,18 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
                             final String videoId = key;
 
                             // resolve the player view from the layout
-                            YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.player);
+                            final YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.player);
 
                             // strings.xml
                             playerView.initialize(getString(R.string.youtube_api_key), new YouTubePlayer.OnInitializedListener() {
                                 @Override
                                 public void onInitializationSuccess(YouTubePlayer.Provider provider,
                                                                     YouTubePlayer youTubePlayer, boolean b) {
-                                    // do any work here to cue video, play video, etc.
                                     youTubePlayer.cueVideo(videoId);
+                                    if((Double.parseDouble(movies.getRating()) / 2) > 3.5){
+                                        youTubePlayer.loadVideo(videoId);
+                                        youTubePlayer.setFullscreen(true);
+                                    }
                                 }
 
                                 @Override

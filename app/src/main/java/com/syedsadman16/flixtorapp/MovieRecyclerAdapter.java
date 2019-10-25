@@ -42,6 +42,7 @@ public class MovieRecyclerAdapter extends
         public TextView title;
         public TextView description;
         public ImageView posterPath;
+        public TextView popularTextView;
         LinearLayout linear;
 
         public ViewHolder(View itemView) {
@@ -50,14 +51,21 @@ public class MovieRecyclerAdapter extends
             description = (TextView) itemView.findViewById(R.id.desc);
             posterPath = (ImageView) itemView.findViewById(R.id.posterPath);
             linear = itemView.findViewById(R.id.row);
+            popularTextView = (TextView) itemView.findViewById(R.id.popularText);
         }
 
         public void populateView(final Movie movie) {
             title.setText(movie.getTitle());
             description.setText(movie.getDescription());
             Glide.with(mContext).load(movie.getPosterPath())
+                    
                     .apply(new RequestOptions().placeholder(R.drawable.placeholder)
                             .error(R.drawable.imagenotfound)).into(posterPath);
+
+            if((Double.parseDouble(movie.getRating()) / 2) > 3.5){
+                popularTextView.setVisibility(View.VISIBLE);
+            }
+
 
             linear.setOnClickListener(new View.OnClickListener() {
                 @Override
