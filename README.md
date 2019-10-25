@@ -1,7 +1,6 @@
 # Flix
 Flix is an app that allows users to browse movies from the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-
 ## Flix Part 2
 
 ### User Stories
@@ -28,7 +27,7 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 
 ### Notes
 
-- Movies are considered popular iif rating > 3.5/5
+- Movies are considered popular if rating > 3.5/5
 - Textview overlay with 'Popular Movie' tag
 - Popular movies open fullscreen trailers while less popular show detailed page
 

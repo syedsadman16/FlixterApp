@@ -58,7 +58,7 @@ public class MovieRecyclerAdapter extends
             title.setText(movie.getTitle());
             description.setText(movie.getDescription());
             Glide.with(mContext).load(movie.getPosterPath())
-                    
+
                     .apply(new RequestOptions().placeholder(R.drawable.placeholder)
                             .error(R.drawable.imagenotfound)).into(posterPath);
 
