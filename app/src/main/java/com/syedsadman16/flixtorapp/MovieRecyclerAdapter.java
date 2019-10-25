@@ -63,6 +63,8 @@ public class MovieRecyclerAdapter extends
             //Displaying fullscreen indicator
             if((Double.parseDouble(movie.getRating()) / 2) > 3.5){
                 popularTextView.setVisibility(View.VISIBLE);
+            } else {
+                popularTextView.setVisibility(View.INVISIBLE);
             }
 
             linear.setOnClickListener(new View.OnClickListener() {
